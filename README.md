@@ -15,8 +15,8 @@ If you invite another User to your workspace, you can both work on the same boar
 Turbo frames and streams are used to broadcast the changes.
 
 ## Some notes on the stack used
-- Ruby 3.2.3
-- Ruby on Rails 7.1.3
+- Ruby 3.2.5
+- Ruby on Rails 7.2.1.1
 - [Authentication Zero](https://github.com/lazaronixon/authentication-zero)
 - [LiteStack](https://github.com/oldmoe/litestack)
 - Flowbite TailwindCSS components
