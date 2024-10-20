@@ -2,15 +2,15 @@
   <div id="<%= dom_id board %>" class="text-center max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <p class="mb-2 text-xl font-bold text-gray-900 dark:text-white"><%= board.name %></p>
     <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">This will be a description of the board.</p>
-    <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
-      <% if policy(board).destroy? %>
-        <a href="<%= board_path(board) %>" data-turbo-frame="_top" data-turbo-method="delete" data-turbo-confirm="Are you sure you want to delete this board?" class="w-full sm:w-auto bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-gray-700">
-          <div class="font-sans text-sm font-semibold">Delete</div>
-        </a>
-      <% end %>
+    <div class="items-center justify-evenly space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
       <% if policy(board).edit? %>
         <a href="<%= edit_board_path(board) %>" data-turbo-frame="_top" class="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
           <div class="font-sans text-sm font-semibold">Edit</div>
+        </a>
+      <% end %>
+      <% if policy(board).destroy? %>
+        <a href="<%= board_path(board) %>" data-turbo-frame="_top" data-turbo-method="delete" data-turbo-confirm="Are you sure you want to delete this board?" class="w-full sm:w-auto bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-gray-700">
+          <div class="font-sans text-sm font-semibold">Delete</div>
         </a>
       <% end %>
     </div>
