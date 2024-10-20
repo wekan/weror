@@ -49,3 +49,5 @@ audit.json
 
 /.dev/
 
+# Apple
+.DS_Store
