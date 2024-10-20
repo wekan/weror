@@ -1,7 +1,7 @@
 <div class="mt-20 flex flex-col lg:flex-row mx-auto">
   <div class="order-last lg:order-first m-4 pt-8 px-4 mx-auto flex flex-col gap-3">
     <% if policy(@workspace).edit? %>
-      <%= link_to "Edit this workspace", edit_workspace_path(@workspace), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <%= link_to "Rename this workspace", edit_workspace_path(@workspace), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     <% end %>
     <%= link_to "Manage Members", workspace_members_path(@workspace), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     <%= link_to "Back to workspaces", workspaces_path, class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>

@@ -27,7 +27,7 @@ class WorkspacesTest < ApplicationSystemTestCase
 
   test "should update Workspace" do
     visit workspace_url(@workspace)
-    click_on "Edit this workspace", match: :first
+    click_on "Rename this workspace", match: :first
 
     fill_in "Name", with: @workspace.name
     click_on "Update Workspace"
