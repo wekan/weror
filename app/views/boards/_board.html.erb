@@ -5,7 +5,7 @@
     <div class="items-center justify-evenly space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
       <% if policy(board).edit? %>
         <a href="<%= edit_board_path(board) %>" data-turbo-frame="_top" class="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-          <div class="font-sans text-sm font-semibold">Edit</div>
+          <div class="font-sans text-sm font-semibold">Rename</div>
         </a>
       <% end %>
       <% if policy(board).destroy? %>

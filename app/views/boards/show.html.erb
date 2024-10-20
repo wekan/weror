@@ -21,7 +21,7 @@
     </div>
     <p class="text-2xl font-bold dark:text-white pb-2"> <%= @board.name %> </p>
     <% if policy(@board).edit? %>
-      <%= link_to "Edit this board", edit_board_path(@board), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <%= link_to "Rename this board", edit_board_path(@board), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     <% end %>
     <%= link_to "Back to workspace", workspace_path(@board.workspace), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
   </div>
