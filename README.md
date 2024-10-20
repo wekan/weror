@@ -1,17 +1,32 @@
-# I Can Has Kanban?
+# Kanban prototype
+
+[xet7](https://github.com/xet7) created this test fork
+of this kanban prototype. It remains to be seen,
+does this prototype get enough progress to be useful.
+It's just at test, does xet7 get stuck somewhere.
+
+https://github.com/wekan/wekan/wiki/WeKan-Multiverse-Roadmap
+
+xet7 also sent some updates upsteam:
+
+https://github.com/jbigler/i-can-has-kanban/pull/4
+
+## Fork of I Can Has Kanban
+
+https://github.com/jbigler/i-can-has-kanban
+
 *Yes, you can!*
 
-![CI/CD](https://github.com/jbigler/i-can-has-kanban/actions/workflows/on_push.yml/badge.svg)
+Welcome to the meme Kanban board that jbigler created
+as a learning project for the latest Rails stack.
 
-Welcome to the meme Kanban board that I created as a learning project for the latest Rails stack.
-
-The project is deployed on a free fly.io instance at http://has-kanban.fly.dev
-
-After creating an account, you can create workspaces which will be able to be shared with others.
+After creating an account, you can create workspaces
+which will be able to be shared with others.
 Within a workspace you can create as many boards as you need.
 Each board has a collection of lists, and each list has a collection of cards.
 The boards and lists can be manipulated via drag-and-drop.
-If you invite another User to your workspace, you can both work on the same board together.
+If you invite another User to your workspace, you can
+both work on the same board together.
 Turbo frames and streams are used to broadcast the changes.
 
 ## Some notes on the stack used
