@@ -5,6 +5,8 @@ of this kanban prototype. It remains to be seen,
 does this prototype get enough progress to be useful.
 It's just at test, does xet7 get stuck somewhere.
 
+A list of prototypes:
+
 https://github.com/wekan/wekan/wiki/WeKan-Multiverse-Roadmap
 
 xet7 also sent some updates upsteam:
