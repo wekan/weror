@@ -34,5 +34,6 @@ module.exports = {
     function({ addVariant }) {
       addVariant('admin', 'div[data-admin] &')
     }
-  ]
+  ],
+  darkMode: 'class',
 }

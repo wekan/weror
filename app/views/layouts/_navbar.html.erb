@@ -4,6 +4,12 @@
       <img src="/wekan-logo.svg" class="h-8" alt="Logo">
       <span class="hidden sm:block self-center text-2xl font-semibold whitespace-nowrap dark:text-white">WeKan</span>
   </a>
+<% if false %>
+Later, 
+  <div>
+    <%= image_tag("/lamp.svg", class: 'w-6 h-6 hover:cursor-pointer') %>
+  </div>
+<% end %>  
   <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
     <% if Current.user %>
       <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
