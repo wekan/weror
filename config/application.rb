@@ -8,6 +8,13 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Translations https://guides.rubyonrails.org/i18n.html
+config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,json}')]
+config.i18n.default_locale = :en
+# Permitted locales available for the application
+I18n.available_locales = [:en, :pt]
+
+
 module ICanHasKanban
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

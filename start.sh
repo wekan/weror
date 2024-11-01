@@ -4,6 +4,11 @@ function pause(){
         read -p "$*"
 }
 
+# Rename, to remove some text from middle of filenames:
+# brew install rename
+# sudo apt -y install rename
+# rename 's|.i18n||g' *
+
 echo
 PS3='Please enter your choice: '
 options=("Install WeKan dependencies" "Build WeKan" "Run WeKan for dev at http://localhost:3000" "Run WeKan for production at port 3000" "Pull all translations" "Push English base translation" "Push translation" "Rubocop auto correct all" "Quit")
