@@ -64,7 +64,7 @@ do
       break
       ;;
 
-    "Rubocop auto correct all"
+    "Rubocop auto correct all")
       rubocop -A
       echo Done.
       break
