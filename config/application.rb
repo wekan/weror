@@ -12,7 +12,7 @@ Bundler.require(*Rails.groups)
 config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,json}')]
 config.i18n.default_locale = :en
 # Permitted locales available for the application
-I18n.available_locales = [:en, :pt]
+#I18n.available_locales = [:en, :pt]
 
 
 module ICanHasKanban
