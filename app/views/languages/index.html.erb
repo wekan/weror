@@ -1,0 +1,7 @@
+<h1>Available Languages</h1>
+<p>Current Locale: <%= I18n.locale %></p>
+<ul>
+  <% @languages.each do |locale| %>
+    <li><%= link_to locale, url_for(locale: locale) %></li>
+  <% end %>
+</ul>

@@ -1,22 +1,31 @@
 <div class="mt-12 flex flex-col mx-auto">
   <h2 class="py-6 text-4xl font-bold dark:text-white">Settings</h2>
 
-  <p>Signed as <%= Current.user.email %></p>
+  <% if Current.user %>
+    <p>Signed as <%= Current.user.email %></p>
 
-  <h3 class="py-6 text-3xl font-bold dark:text-white">Login and verification</h3>
-  <div>
-    <%= link_to "Change password", edit_password_path, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
-  </div>
+    <h3 class="py-6 text-3xl font-bold dark:text-white">Login and verification</h3>
+    <div>
+      <%= link_to "Change password", edit_password_path, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    </div>
 
-  <div>
-    <%= link_to "Change email address", edit_identity_email_path, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
-  </div>
+    <div>
+      <%= link_to "Change email address", edit_identity_email_path, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    </div>
 
-  <h3 class="py-6 text-3xl font-bold dark:text-white">Access history</h3>
+    <h3 class="py-6 text-3xl font-bold dark:text-white">Access history</h3>
 
-  <div>
-    <%= link_to "Devices & Sessions", sessions_path, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
-  </div>
+    <div>
+      <%= link_to "Devices & Sessions", sessions_path, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    </div>
 
-  <%= button_to "Log out", Current.session, method: :delete, class: "mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-  <div>
+    <h3 class="py-6 text-3xl font-bold dark:text-white">Language</h3>
+    <div>
+      <%= link_to "Change language", edit_language_path(@language), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    </div>
+
+    <%= button_to "Log out", Current.session, method: :delete, class: "mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+  <% else %>
+    <p>Please <a href="<%= login_path %>">log in</a>.</p>
+  <% end %>
+</div>

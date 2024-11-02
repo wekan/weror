@@ -14,19 +14,20 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    if @user ||= User.authenticate_by(email: params[:email], password: params[:password])
-      @session = @user.sessions.create!
-      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
-
-      redirect_to workspaces_path, notice: "Signed in successfully"
+    user = User.find_by(email: params[:email])
+    if user&.authenticate(params[:password])
+      session[:user_id] = user.id
+      Current.user = user
+      redirect_to workspaces_path, notice: 'Logged in successfully.'
     else
-      redirect_to sign_in_path(email_hint: params[:email]), notice: "That email or password is incorrect"
+      render :new, alert: 'Invalid email or password.'
     end
   end
 
   def destroy
-    @session.destroy
-    redirect_to(root_path, notice: "That session has been logged out")
+    session[:user_id] = nil
+    Current.user = nil
+    redirect_to login_path, notice: 'Logged out successfully.'
   end
 
   private

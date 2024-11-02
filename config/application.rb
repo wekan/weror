@@ -17,9 +17,6 @@ module ICanHasKanban
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{json}")]
     config.i18n.default_locale = :en
 
-    # Load JSON locales without root keys, using filenames as locale keys
-    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{json}")]
-
     config.i18n.available_locales = Dir[Rails.root.join("config", "locales", "*.json")].map do |file|
       File.basename(file, ".json").to_sym
     end

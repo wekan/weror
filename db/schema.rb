@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_03_05_153216) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_02_040438) do
   create_table "boards", force: :cascade do |t|
     t.integer "workspace_id", null: false
     t.string "name"
@@ -41,6 +39,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_03_05_153216) do
     t.datetime "updated_at", null: false
     t.index ["invited_by_id"], name: "index_invitations_on_invited_by_id"
     t.index ["workspace_id"], name: "index_invitations_on_workspace_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "locale"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -80,6 +86,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_03_05_153216) do
     t.boolean "verified", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "language", default: "en"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

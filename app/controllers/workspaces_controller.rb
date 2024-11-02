@@ -3,9 +3,11 @@
 # Workspaces Controller
 class WorkspacesController < ApplicationController
   before_action :set_workspace, only: %i[show edit update destroy]
+  before_action :authenticate_user!
 
   # GET /workspaces or /workspaces.json
   def index
+    @workspaces = Current.user.memberships.includes(:workspace).map(&:workspace)
     @my_workspaces = Current.user.workspaces.mine
     @others_workspaces = Current.user.workspaces.others
   end
@@ -72,5 +74,9 @@ class WorkspacesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def workspace_params
       params.require(:workspace).permit(:name)
+    end
+
+    def authenticate_user!
+      redirect_to login_path unless Current.user
     end
 end
