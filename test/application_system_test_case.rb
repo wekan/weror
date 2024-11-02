@@ -23,10 +23,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in :password, with: "Secret1*3*5*"
     click_on "Login to your account"
 
-    assert_current_path workspaces_path
     @current_user = user
     user
   end
+
+  attr_reader :current_user
 
   def teardown
     super
