@@ -18,16 +18,16 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       Current.user = user
-      redirect_to workspaces_path, notice: 'Logged in successfully.'
+      redirect_to workspaces_path, notice: "Logged in successfully."
     else
-      render :new, alert: 'Invalid email or password.'
+      render :new, alert: "Invalid email or password."
     end
   end
 
   def destroy
     session[:user_id] = nil
     Current.user = nil
-    redirect_to login_path, notice: 'Logged out successfully.'
+    redirect_to login_path, notice: "Logged out successfully."
   end
 
   private

@@ -9,11 +9,10 @@ class SettingsController < ApplicationController
   end
 
   private
-
-  def change_locale
-    if I18n.available_locales.map(&:to_s).include?(params[:locale])
-      session[:locale] = params[:locale]
+    def change_locale
+      if I18n.available_locales.map(&:to_s).include?(params[:locale])
+        session[:locale] = params[:locale]
+      end
+      redirect_back fallback_location: root_path
     end
-    redirect_back fallback_location: root_path
-  end
 end

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get "settings", to: "settings#index"
   get "help", to: "help#index"
 
-  get 'login', to: 'sessions#new'
+  get "login", to: "sessions#new"
 
   root "home#index"
 
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Route to change locale
-  patch 'change_locale', to: 'settings#change_locale'
+  patch "change_locale", to: "settings#change_locale"
 
   # Defines the root path route ("/")
   # root "posts#index"

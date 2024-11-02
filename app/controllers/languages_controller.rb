@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LanguagesController < ApplicationController
   before_action :set_locale
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -15,18 +17,13 @@ class LanguagesController < ApplicationController
   end
 
   def set_locale
-    if params[:locale]
-      I18n.locale = params[:locale]
-    else
-      I18n.locale = I18n.default_locale
-    end
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
   # Add other actions (new, create, edit, update, destroy) as needed
 
   private
-
-  def record_not_found
-    redirect_to languages_path, alert: 'Language not found.'
-  end
+    def record_not_found
+      redirect_to languages_path, alert: "Language not found."
+    end
 end
