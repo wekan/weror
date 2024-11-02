@@ -1,12 +1,14 @@
 <h1>Current Locale</h1>
-
-<p><%= I18n.locale %></p>
-
-<br>
+<p><strong>Current language:</strong> <%= @current_locale %></p>
 
 <h1>Available Languages</h1>
 <ul>
   <% @languages.each do |locale| %>
-    <li><%= link_to locale, update_locale_path(locale: locale), method: :post %></li>
+    <li>
+      <%= link_to locale, update_locale_path(locale: locale), 
+          method: :post,
+          class: locale == @current_locale ? 'active' : '' %>
+      <%= ' (current)' if locale == @current_locale %>
+    </li>
   <% end %>
 </ul>

@@ -6,6 +6,7 @@ class LanguagesController < ApplicationController
 
   def index
     @languages = I18n.available_locales
+    @current_locale = I18n.locale
   end
 
   def show
@@ -17,12 +18,9 @@ class LanguagesController < ApplicationController
   end
 
   def update_locale
-    if current_user.update(language: params[:locale])
-      I18n.locale = params[:locale]
-      redirect_to languages_path, notice: "Locale successfully updated."
-    else
-      redirect_to languages_path, alert: "Failed to update locale."
-    end
+    I18n.locale = params[:locale]
+    session[:locale] = I18n.locale
+    redirect_back(fallback_location: root_path)
   end
 
   def set_locale

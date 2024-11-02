@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   # Route to change locale
   patch "change_locale", to: "settings#change_locale"
-  post "update_locale", to: "languages#update_locale"
+  post "update_locale", to: "languages#update_locale", as: :update_locale
   get "/update_locale", to: "application#update_locale"
   # get 'update_locale', to: 'application#update_locale'
 
