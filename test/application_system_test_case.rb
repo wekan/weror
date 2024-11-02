@@ -18,9 +18,4 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
                          url: "http://selenium:4444",
                          timeout: 120
                        }
-
-  # Remove duplicate methods since they're now in AuthenticationHelpers
-  remove_method :sign_in_as if method_defined?(:sign_in_as)
-  remove_method :current_user if method_defined?(:current_user)
-  remove_method :teardown if method_defined?(:teardown)
 end
