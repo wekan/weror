@@ -44,6 +44,10 @@ module ActiveSupport
   end
 end
 
+class ActionController::TestCase
+  include AuthenticationHelpers
+end
+
 class ActionDispatch::IntegrationTest
   include AuthenticationHelpers
 end

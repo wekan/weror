@@ -7,6 +7,8 @@ module AuthenticationHelpers
       fill_in :email, with: user.email
       fill_in :password, with: "Secret1*3*5*"
       click_on "Login to your account"
+    elsif defined?(controller) && controller.respond_to?(:session)
+      controller.session[:user_id] = user.id
     elsif respond_to?(:session)
       session[:user_id] = user.id
     else
