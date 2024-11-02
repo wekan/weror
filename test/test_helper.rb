@@ -87,7 +87,7 @@ end
 class ActionDispatch::IntegrationTest
   include AuthenticationHelpers
 
-  remove_method :teardown if method_defined?(:teardown)
+  # remove_method :teardown if method_defined?(:teardown)
   remove_method :sign_in_as if method_defined?(:sign_in_as)
 end
 
