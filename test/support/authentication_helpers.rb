@@ -2,19 +2,24 @@
 
 module AuthenticationHelpers
   def sign_in_as(user)
-    if respond_to?(:visit)
-      visit sign_in_url
-      fill_in :email, with: user.email
-      fill_in :password, with: "Secret1*3*5*"
-      click_on "Login to your account"
-    elsif defined?(controller) && controller.respond_to?(:session)
-      controller.session[:user_id] = user.id
-    elsif respond_to?(:session)
-      session[:user_id] = user.id
-    else
-      post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
+    if respond_to?(:session)
+      session[:current_user_id] = user.id
+    elsif respond_to?(:post)
+      # For integration tests
+      post sign_in_path, params: {
+        email: user.email,
+        password: user.password
+      }
     end
-    @current_user = user
+    user
+  end
+
+  def sign_out
+    if respond_to?(:session)
+      session.delete(:current_user_id)
+    elsif respond_to?(:delete)
+      delete sign_out_path
+    end
   end
 
   def current_user

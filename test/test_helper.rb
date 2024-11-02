@@ -45,7 +45,13 @@ module ActiveSupport
 end
 
 class ActionController::TestCase
+  include Devise::Test::IntegrationHelpers if defined?(Devise)
   include AuthenticationHelpers
+
+  # Add session support
+  def setup
+    @request ||= ActionController::TestRequest.create(self.class)
+  end
 end
 
 class ActionDispatch::IntegrationTest
