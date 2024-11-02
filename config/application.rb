@@ -8,17 +8,29 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# Translations https://guides.rubyonrails.org/i18n.html
-config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,json}')]
-config.i18n.default_locale = :en
-# Permitted locales available for the application
-#I18n.available_locales = [:en, :pt]
-
-
 module ICanHasKanban
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
+
+    # Translations https://guides.rubyonrails.org/i18n.html
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{json}')]
+    config.i18n.default_locale = :en
+
+    # Load JSON locales without root keys, using filenames as locale keys
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{json}')]
+
+    config.i18n.available_locales = Dir[Rails.root.join('config', 'locales', '*.json')].map do |file|
+      File.basename(file, '.json').to_sym
+    end
+
+    config.i18n.backend = I18n::Backend::Simple.new.tap do |backend|
+      config.i18n.available_locales.each do |locale|
+        file = Rails.root.join('config', 'locales', "#{locale}.json")
+        translations = JSON.parse(File.read(file))
+        backend.store_translations(locale, translations)
+      end
+    end
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
