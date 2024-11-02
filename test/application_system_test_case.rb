@@ -10,6 +10,8 @@ Capybara.configure do |config|
 end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  include AuthenticationHelpers
+
   driven_by :selenium, using: :chrome,
                        screen_size: [1400, 1400], options: {
                          browser: :remote,
@@ -17,20 +19,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
                          timeout: 120
                        }
 
-  def sign_in_as(user)
-    visit sign_in_url
-    fill_in :email, with: user.email
-    fill_in :password, with: "Secret1*3*5*"
-    click_on "Login to your account"
-
-    @current_user = user
-    user
-  end
-
-  attr_reader :current_user
-
-  def teardown
-    super
-    @current_user = nil
-  end
+  # Remove duplicate methods since they're now in AuthenticationHelpers
+  remove_method :sign_in_as if method_defined?(:sign_in_as)
+  remove_method :current_user if method_defined?(:current_user)
+  remove_method :teardown if method_defined?(:teardown)
 end

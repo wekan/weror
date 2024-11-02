@@ -17,7 +17,12 @@ Minitest::Reporters.use!(
 
 module AuthenticationHelpers
   def sign_in_as(user)
-    if respond_to?(:session)
+    if respond_to?(:visit)
+      visit sign_in_url
+      fill_in :email, with: user.email
+      fill_in :password, with: "Secret1*3*5*"
+      click_on "Login to your account"
+    elsif respond_to?(:session)
       session[:user_id] = user.id
     else
       post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
@@ -28,10 +33,17 @@ module AuthenticationHelpers
   def current_user
     @current_user
   end
+
+  def teardown
+    super if defined?(super)
+    @current_user = nil
+    session[:user_id] = nil if respond_to?(:session)
+  end
 end
 
 module ActiveSupport
   class TestCase
+    include AuthenticationHelpers
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
 
@@ -50,18 +62,8 @@ module ActiveSupport
     include FactoryBot::Syntax::Methods
 
     # Add more helper methods to be used by all tests here...
-    def sign_in_as(user)
-      session[:user_id] = user.id if respond_to?(:session)
-      @current_user = user
-    end
-
-    attr_reader :current_user
-
-    def teardown
-      super if defined?(super)
-      @current_user = nil
-      session[:user_id] = nil if respond_to?(:session)
-    end
+    remove_method :sign_in_as if method_defined?(:sign_in_as)
+    remove_method :current_user if method_defined?(:current_user)
 
     # Pundit helpers
     def assert_permit(user, record, action)
@@ -87,18 +89,9 @@ end
 class ActionDispatch::IntegrationTest
   include AuthenticationHelpers
 
-  def setup
-    @current_user = nil
-  end
-
-  def sign_in_as(user)
-    post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
-    @current_user = user
-  end
-
-  def teardown
-    @current_user = nil
-  end
+  remove_method :setup if method_defined?(:setup)
+  remove_method :teardown if method_defined?(:teardown)
+  remove_method :sign_in_as if method_defined?(:sign_in_as)
 end
 
 Shoulda::Matchers.configure do |config|
