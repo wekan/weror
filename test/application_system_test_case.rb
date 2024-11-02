@@ -24,6 +24,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on "Login to your account"
 
     assert_current_path workspaces_path
+    session[:user_id] = user.id # Add this line to ensure session is set
     user
+  end
+
+  def teardown
+    super
+    session[:user_id] = nil if respond_to?(:session)
   end
 end
