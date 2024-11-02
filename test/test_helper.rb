@@ -15,6 +15,13 @@ Minitest::Reporters.use!(
   Minitest.backtrace_filter
 )
 
+module AuthenticationHelpers
+  def sign_in_as(user)
+    post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
+    @current_user = user
+  end
+end
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers
@@ -66,6 +73,14 @@ module ActiveSupport
       klass = self.class.name[0, index + 6]
       klass.constantize.new(user, record).public_send("#{action}?")
     end
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include AuthenticationHelpers
+
+  def setup
+    @current_user = nil
   end
 end
 
