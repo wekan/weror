@@ -62,8 +62,6 @@ module ActiveSupport
     include FactoryBot::Syntax::Methods
 
     # Add more helper methods to be used by all tests here...
-    remove_method :sign_in_as if method_defined?(:sign_in_as)
-    remove_method :current_user if method_defined?(:current_user)
 
     # Pundit helpers
     def assert_permit(user, record, action)
