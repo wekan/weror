@@ -2,23 +2,26 @@
 
 module AuthenticationHelpers
   def sign_in_as(user)
-    if respond_to?(:session)
-      session[:current_user_id] = user.id
-    elsif respond_to?(:post)
-      # For integration tests
-      post sign_in_path, params: {
+    if respond_to?(:post)
+      # Integration test
+      post sign_in_url, params: {
         email: user.email,
         password: user.password
       }
+    else
+      # Controller test
+      @request.session[:user_id] = user.id
     end
     user
   end
 
   def sign_out
-    if respond_to?(:session)
-      session.delete(:current_user_id)
-    elsif respond_to?(:delete)
-      delete sign_out_path
+    if respond_to?(:delete)
+      # Integration test
+      delete sign_out_url
+    else
+      # Controller test
+      @request.session[:user_id] = nil
     end
   end
 

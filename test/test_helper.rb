@@ -48,9 +48,10 @@ class ActionController::TestCase
   include Devise::Test::IntegrationHelpers if defined?(Devise)
   include AuthenticationHelpers
 
-  # Add session support
-  def setup
-    @request ||= ActionController::TestRequest.create(self.class)
+  setup do
+    @routes = Rails.application.routes
+    @controller = described_class.new
+    @request = ActionController::TestRequest.create(described_class)
   end
 end
 
