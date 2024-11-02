@@ -18,7 +18,12 @@ Minitest::Reporters.use!(
 module AuthenticationHelpers
   def sign_in_as(user)
     post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
+    follow_redirect! if response.redirect?
     @current_user = user
+  end
+
+  def current_user
+    @current_user
   end
 end
 
@@ -43,15 +48,20 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
     def sign_in_as(user)
-      if respond_to?(:post)
-        post(sign_in_url, params: { email: user.email, password: "Secret1*3*5*" })
-      else
+      if respond_to?(:session)
         session[:user_id] = user.id
+      else
+        post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
+        follow_redirect! if response.redirect?
       end
-      user
+      @current_user = user
     end
 
+    attr_reader :current_user
+
     def teardown
+      super if defined?(super)
+      @current_user = nil
       session[:user_id] = nil if respond_to?(:session)
     end
 
@@ -80,6 +90,10 @@ class ActionDispatch::IntegrationTest
   include AuthenticationHelpers
 
   def setup
+    @current_user = nil
+  end
+
+  def teardown
     @current_user = nil
   end
 end
