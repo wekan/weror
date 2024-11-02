@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def update_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+    redirect_back(fallback_location: root_path)
+  end
+
   private
     def authenticate
       if (session_record = Session.find_by(id: cookies.signed[:session_token]))
@@ -33,7 +38,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-      I18n.locale = params[:locale] || I18n.default_locale
+      I18n.locale = current_user&.language || I18n.default_locale
     end
 
     def set_current_user

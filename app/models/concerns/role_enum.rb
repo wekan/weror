@@ -4,7 +4,7 @@ module RoleEnum
   extend ActiveSupport::Concern
 
   included do
-    enum role: { owner: 0, admin: 1, editor: 2, viewer: 3 }
+    enum :role, [:owner, :admin, :editor, :viewer]
 
     validates :role, inclusion: { in: roles.keys }
   end

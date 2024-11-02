@@ -7,6 +7,6 @@
 <h1>Available Languages</h1>
 <ul>
   <% @languages.each do |locale| %>
-    <li><%= link_to locale, url_for(locale: locale) %></li>
+    <li><%= link_to locale, update_locale_path(locale: locale), method: :post %></li>
   <% end %>
 </ul>

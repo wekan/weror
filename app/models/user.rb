@@ -37,4 +37,7 @@ class User < ApplicationRecord
   after_update if: :password_digest_previously_changed? do
     sessions.where.not(id: Current.session).delete_all
   end
+
+  # Add locale attribute (ensure a migration is created to add this column)
+  # attr_accessor :locale
 end
