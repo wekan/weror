@@ -22,7 +22,7 @@ do
         sudo apt -y install build-essential ruby-full ruby-dev libyaml-dev sqlitebrowser
       elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "macOS";
-        brew install ryby@3.2 sqlite sqlite-utils db-browser-for-sqlite
+        brew install ruby@3.2 sqlite sqlite-utils db-browser-for-sqlite
       fi
       sudo gem install rails
       sudo gem update
