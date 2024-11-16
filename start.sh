@@ -28,7 +28,7 @@ do
       elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "macOS";
         brew install ruby@3.2 sqlite sqlite-utils db-browser-for-sqlite libyaml nano
-        gem uninstall bundler
+        gem uninstall bundler --all
         gem install bundler
         gem install rails
         gem update
