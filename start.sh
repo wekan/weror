@@ -11,7 +11,7 @@ function pause(){
 
 echo
 PS3='Please enter your choice: '
-options=("Install WeKan dependencies" "Run WeKan for dev at http://localhost:3000" "Run WeKan for production at port 3000" "Pull all translations" "Push English base translation" "Push translation" "Rubocop auto correct all" "Quit")
+options=("Install WeKan dependencies" "Update" "Run WeKan for dev at http://localhost:3000" "Run WeKan for production at port 3000" "Pull all translations" "Push English base translation" "Push translation" "Rubocop auto correct all" "Quit")
 
 select opt in "${options[@]}"
 do
@@ -36,6 +36,13 @@ do
         bundle install
       fi
       echo Done.
+      break
+      ;;
+
+    "Update")
+      gem update
+      bundle update
+      echo Done
       break
       ;;
 
