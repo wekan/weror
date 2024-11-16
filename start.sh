@@ -27,7 +27,7 @@ do
         sudo bundle install
       elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "macOS";
-        brew install ruby@3.2 sqlite sqlite-utils db-browser-for-sqlite
+        brew install ruby@3.2 sqlite sqlite-utils db-browser-for-sqlite libyaml
         gem install bundler -v 2.4.22
         gem install rails
         gem update
