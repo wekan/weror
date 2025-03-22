@@ -48,6 +48,8 @@ audit.json
 /coverage
 
 /.dev/
+/node_modules/
+
 
 # Apple
 .DS_Store
