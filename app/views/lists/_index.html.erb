@@ -1,0 +1,15 @@
+<% role = Current.user.memberships.where(workspace_id: board.workspace.id).first.role %>
+<%= tag.div id: "lists_frame", class: "contents", data: { role: role } do %>
+  <div id="lists"
+       data-controller="sortable"
+       data-sortable-type-value="list"
+       class="flex-grow max-h-full flex flex-row bg-gray-400 overflow-x-scroll">
+
+    <% board.lists.rank(:row_order).each do |list| %>
+      <%= render list %>
+    <% end %>
+    <div id="new-list" class="admin:flex flex-col hidden min-w-72 max-w-72 p-3 m-2 bg-gray-200 border border-gray-400 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <%= link_to "+ Add New List", new_board_list_path(board), data: { turbo_frame: "modal" }, class: "font-bold dark:text-white text-center" %>
+    </div>
+  </div>
+<% end %>

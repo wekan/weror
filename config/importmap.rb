@@ -13,3 +13,5 @@ pin "sortablejs" # @1.15.2
 pin "stimulus-notification" # @2.2.0
 pin "hotkeys-js" # @3.13.7
 pin "stimulus-use" # @0.51.3
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"

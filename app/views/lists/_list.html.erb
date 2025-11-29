@@ -2,8 +2,7 @@
      data-sortable-update-url="<%= list_path(list) %>"
      class="draggable min-w-72 max-w-72 p-3 m-2 bg-gray-200 border border-gray-400 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex flex-col">
 
-     <%= link_to list.title, edit_list_path(list), id: "label_#{ dom_id list}", class: "admin:block hidden font-bold dark:text-white text-center", data: { turbo_frame: "modal" } %>
-     <p class="admin:hidden block font-bold dark:text-white text-center"><%= list.title %></p> 
+    <p class="font-bold dark:text-white text-center"><%= list.title %></p>
 
      <ul id="cards_for_<%= dom_id(list) %>"
          data-controller="sortable"
@@ -18,5 +17,5 @@
            <% end %>
          <% end %>
      </ul>
-     <%= link_to "Add Card", new_list_card_path(list), data: { turbo_frame: "modal" }, class: "admin:block hidden font-bold dark:text-white text-center" %>
+    <%= link_to "Add Card", new_list_card_path(list), data: { turbo_frame: "modal" }, class: "font-bold dark:text-white text-center" %>
 </div>

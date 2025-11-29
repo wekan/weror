@@ -18,15 +18,15 @@
       <div class="grid gap-4 mb-4 grid-cols-2">
         <div class="col-span-2">
           <%= form.label :title, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-          <%= form.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", placeholder: "Title", required: "", autofocus: "" %>
+          <%= form.rich_text_area :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", placeholder: "Title", required: "", autofocus: "" %>
         </div>
         <div class="col-span-2">
           <%= form.label :description, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-          <%= form.text_area :description, rows: 4, class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Description" %>
+          <%= form.rich_text_area :description, class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Description" %>
         </div>
         <div class="col-span-2">
           <%= form.label :color, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-          <%= form.select :color, %w(none gray red green blue orange violet).each { |color| %(<option><span class="w-8 h-8 rounded-full bg-blue-500"></span>#{color}</option>)} %>
+          <%= form.color_field :color, class: "w-12 h-12 p-0 border-0" %>
         </div>
       </div>
       <div class="flex flex-row gap-2 justify-end">

@@ -2,6 +2,9 @@
 
 Rails.application.routes.draw do
   resources :languages
+
+  get "/users/me/sidebar", to: "users#sidebar"
+  get "/rooms/:id/refresh", to: "rooms#refresh"
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
   get  "sign_up", to: "registrations#new"
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
   resources :workspaces, shallow: true do
     resources :members
     resources :boards do
+      resources :swimlanes, except: [:show, :index]
       resources :lists, except: [:index] do
         resources :cards, except: [:index]
       end

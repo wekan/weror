@@ -1,5 +1,5 @@
 <%= turbo_stream_from @board %>
-<div id="<%= dom_id(@board) %>" class="h-full max-h-full flex flex-col overflow-hidden" <%= 'data-admin' if policy(@board).update? %>>
+<div id="<%= dom_id(@board) %>" class="h-full max-h-full flex flex-col overflow-hidden <%= 'admin' if policy(@board).update? %>"> 
   <div class="self-center flex flex-row w-full gap-10 pb-2">
 
     <button id="board-dropdown" 
@@ -26,18 +26,25 @@
     <%= link_to "Back to workspace", workspace_path(@board.workspace), class: "rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
   </div>
   <% role = Current.user.memberships.where(workspace_id: @board.workspace.id).first.role %>
-  <%= tag.div id: "lists_frame", class: "contents", data: { role: role } do %>
-    <div id="lists"
-         data-controller="sortable"
-         data-sortable-type-value="list"
-         class="flex-grow max-h-full flex flex-row bg-gray-400 overflow-x-scroll">
-
-      <% @board.sorted_lists.each do |list| %>
-        <%= render list %>
+  <%= tag.div id: "swimlanes_frame", class: "contents", data: { role: role } do %>
+    <div id="swimlanes" class="flex flex-col gap-6 bg-gray-400 p-4 rounded-lg">
+      <% @board.swimlanes.each do |swimlane| %>
+        <div class="bg-gray-200 rounded-lg shadow p-4 mb-4">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-xl font-bold dark:text-gray-300">Swimlane: <%= swimlane.title %></span>
+            <div>
+              <%= link_to "Edit", edit_swimlane_path(swimlane.id), class: "rounded-lg bg-blue-700 px-3 py-1 text-sm font-medium text-white hover:bg-blue-800" %>
+              <%= link_to "Delete", swimlane_path(swimlane.id), method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg bg-red-700 px-3 py-1 text-sm font-medium text-white hover:bg-red-800" %>
+            </div>
+          </div>
+          <%= render partial: "swimlanes/lists", locals: { swimlane: swimlane } %>
+        </div>
       <% end %>
-      <div id="new-list" class="admin:flex flex-col hidden min-w-72 max-w-72 p-3 m-2 bg-gray-200 border border-gray-400 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <%= link_to "+ Add New List", new_board_list_path(@board), data: { turbo_frame: "modal" }, class: "font-bold dark:text-white text-center" %>
-      </div>
+      <% if policy(@board).update? %>
+        <div class="flex flex-col min-w-72 max-w-72 p-3 m-2 bg-gray-200 border border-gray-400 rounded-lg shadow hover:bg-gray-100">
+          <%= link_to "+ Add New Swimlane", new_board_swimlane_path(@board), data: { turbo_frame: "modal" }, class: "font-bold dark:text-white text-center" %>
+        </div>
+      <% end %>
     </div>
   <% end %>
   <%= turbo_frame_tag "modal", target: "_top", data: { turbo_permanent: true } %>

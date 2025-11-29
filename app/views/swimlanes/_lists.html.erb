@@ -1,0 +1,10 @@
+<div id="swimlane-<%= swimlane.id %>-lists">
+  <div class="flex flex-row gap-4 overflow-x-auto">
+    <% swimlane.lists.each do |list| %>
+      <%= render list %>
+    <% end %>
+    <div class="flex flex-col min-w-72 max-w-72 p-3 m-2 bg-gray-300 border border-gray-400 rounded-lg shadow hover:bg-gray-100">
+      <%= link_to "+ Add New List", new_board_list_path(swimlane.board, list: { swimlane_id: swimlane.id }), data: { turbo_frame: "modal" }, class: "font-bold dark:text-white text-center" %>
+    </div>
+  </div>
+</div>

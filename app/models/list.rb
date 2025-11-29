@@ -5,6 +5,7 @@ class List < ApplicationRecord
   include RankedModel
 
   belongs_to :board, touch: true
+  belongs_to :swimlane, optional: true
   has_many :cards, dependent: :destroy
   has_many :sorted_cards, -> { sorted }, class_name: "Card"
 

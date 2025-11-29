@@ -50,6 +50,8 @@ audit.json
 /.dev/
 /node_modules/
 
+/vendor
 
 # Apple
 .DS_Store
+node_modules

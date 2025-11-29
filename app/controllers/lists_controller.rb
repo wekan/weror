@@ -16,6 +16,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @list = @board.lists.new
+    @list.swimlane_id = params.dig(:list, :swimlane_id)
     authorize @list
   end
 
@@ -25,8 +26,28 @@ class ListsController < ApplicationController
   # POST /lists or /lists.json
   def create
     @list = authorize @board.lists.new(list_params)
-    @list.save
-    redirect_to @board
+    if @list.save
+      respond_to do |format|
+        format.html { redirect_to @board }
+        format.turbo_stream do
+          if @list.swimlane.present?
+            render turbo_stream: turbo_stream.replace(
+              "swimlane-#{@list.swimlane_id}-lists",
+              partial: "swimlanes/lists",
+              locals: { swimlane: @list.swimlane }
+            )
+          else
+            render turbo_stream: turbo_stream.replace(
+              "lists",
+              partial: "lists/index",
+              locals: { board: @board }
+            )
+          end
+        end
+      end
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /lists/1 or /lists/1.json
@@ -54,6 +75,6 @@ class ListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def list_params
-      params.require(:list).permit(:board_id, :title, :row_order_position)
+      params.require(:list).permit(:board_id, :title, :row_order_position, :swimlane_id)
     end
 end
