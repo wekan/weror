@@ -20,14 +20,14 @@ do
       if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo "Linux";
         sudo apt -y install build-essential ruby-full ruby-dev libyaml-dev sqlitebrowser nano
-        sudo gem install bundler -v 2.4.22
+        sudo gem install bundler
         sudo gem install rails
         sudo gem update
         sudo bundle update
         sudo bundle install
       elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "macOS";
-        brew install ruby@3.3 sqlite sqlite-utils db-browser-for-sqlite libyaml nano
+        brew install ruby sqlite sqlite-utils db-browser-for-sqlite libyaml nano
         gem uninstall bundler --all
         gem install bundler
         gem install rails

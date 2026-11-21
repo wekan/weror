@@ -32,10 +32,11 @@ both work on the same board together.
 Turbo frames and streams are used to broadcast the changes.
 
 ## Some notes on the stack used
-- Ruby 3.2.5
-- Ruby on Rails 7.2.1.1
+- Ruby 4.0.10
+- Ruby on Rails 8.1.4.1
 - [Authentication Zero](https://github.com/lazaronixon/authentication-zero)
-- [LiteStack](https://github.com/oldmoe/litestack)
+- SQLite, with [Solid Cache](https://github.com/rails/solid_cache) and
+  [Solid Cable](https://github.com/rails/solid_cable) in production
 - Flowbite TailwindCSS components
 - [SortableJS](https://github.com/SortableJS/Sortable) through Stimulus
 - Turbo frames and streams
