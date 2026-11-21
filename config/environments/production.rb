@@ -32,6 +32,9 @@ Rails.application.configure do
   # Do not fall back to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  # Cache assets for far-future expiry since they are all digest stamped.
+  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
@@ -54,18 +57,20 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new($stdout)
-                                       .tap  { |logger| logger.formatter = Logger::Formatter.new }
-                                       .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
+  # Skip http-to-https redirect for the default health check endpoint.
+  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
-  # Prepend all log lines with the following tags.
+  # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [:request_id]
+  config.logger   = ActiveSupport::TaggedLogging.logger($stdout)
 
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+
+  # Prevent health checks from clogging up the logs.
+  config.silence_healthcheck_path = "/up"
 
   # Use the database-backed Solid Cache store in production (config/cache.yml).
   config.cache_store = :solid_cache_store
@@ -99,6 +104,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Only use :id for inspections in production.
+  config.active_record.attributes_for_inspect = [:id]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

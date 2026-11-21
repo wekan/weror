@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module ICanHasKanban
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 8.1
 
     # Translations https://guides.rubyonrails.org/i18n.html
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{json}")]
