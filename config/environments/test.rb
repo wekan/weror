@@ -11,8 +11,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # While tests run files are not watched, reloading is not necessary.
-  config.enable_reloading = false
+  # Spring (bin/rails loads it in development and test) refuses to preload an
+  # application without reloading, so bin/rails db:schema:load stopped with
+  # "Spring reloads, and therefore needs the application to have reloading
+  # enabled". Keep it on while the app uses Spring.
+  config.enable_reloading = true
 
   # Eager loading loads your entire application. When running a single test locally,
   # this is usually not necessary, and can slow down your test suite. However, it's
