@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TypingNotificationsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "typing_notifications_channel"

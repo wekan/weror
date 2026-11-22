@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PresenceChannel < ApplicationCable::Channel
   def subscribed
     stream_from "presence_channel"

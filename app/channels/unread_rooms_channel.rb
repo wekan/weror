@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UnreadRoomsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "unread_rooms_channel"

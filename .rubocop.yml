@@ -179,6 +179,8 @@ Style/FrozenStringLiteralComment:
     - 'actionmailbox/db/migrate/**/*.rb'
     - 'actiontext/db/migrate/**/*.rb'
     - '**/*.md'
+    # Written by the schema dumper, which has no magic comment.
+    - 'db/schema.rb'
 
 Style/MapToHash:
   Enabled: true

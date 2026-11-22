@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SwimlanesController < ApplicationController
   before_action :set_board
   before_action :set_swimlane, only: [:edit, :update, :destroy]
@@ -9,7 +11,7 @@ class SwimlanesController < ApplicationController
   def create
     @swimlane = @board.swimlanes.new(swimlane_params)
     if @swimlane.save
-      redirect_to board_path(@board), notice: 'Swimlane created.'
+      redirect_to board_path(@board), notice: "Swimlane created."
     else
       render :new
     end
@@ -19,7 +21,7 @@ class SwimlanesController < ApplicationController
 
   def update
     if @swimlane.update(swimlane_params)
-      redirect_to board_path(@board), notice: 'Swimlane updated.'
+      redirect_to board_path(@board), notice: "Swimlane updated."
     else
       render :edit
     end
@@ -27,23 +29,23 @@ class SwimlanesController < ApplicationController
 
   def destroy
     @swimlane.destroy
-    redirect_to board_path(@board), notice: 'Swimlane deleted.'
+    redirect_to board_path(@board), notice: "Swimlane deleted."
   end
 
   private
-  def set_board
-    @board = if params[:board_id]
-      Board.find(params[:board_id])
-    elsif params[:id]
-      Swimlane.find(params[:id]).board
+    def set_board
+      @board = if params[:board_id]
+        Board.find(params[:board_id])
+      elsif params[:id]
+        Swimlane.find(params[:id]).board
+      end
     end
-  end
 
-  def set_swimlane
-    @swimlane = @board.swimlanes.find(params[:id])
-  end
+    def set_swimlane
+      @swimlane = @board.swimlanes.find(params[:id])
+    end
 
-  def swimlane_params
-    params.require(:swimlane).permit(:title)
-  end
+    def swimlane_params
+      params.require(:swimlane).permit(:title)
+    end
 end
